@@ -7,9 +7,7 @@ import com.multicampus.spring_mvc_todo.dto.TodoDTO;
 import java.util.List;
 
 public interface ITodoService {
-//    List<TodoDTO> selectAll();
-
-    PageResponseDTO<TodoDTO> getList(PageRequestDTO pageRequestDTO);
+    List<TodoDTO> selectAll();
 
     TodoDTO view(String tno);
 
@@ -19,7 +17,10 @@ public interface ITodoService {
 
     int remove(String tno);
 
-    List<TodoDTO> search(PageRequestDTO pageRequestDTO);
+    PageResponseDTO<TodoDTO>  search(PageRequestDTO pageRequestDTO);
+
+    PageResponseDTO<TodoDTO> getList(PageRequestDTO pageRequestDTO);
+
 
 }
 

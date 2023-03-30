@@ -16,7 +16,8 @@ public interface ITodoDAO {
     public int removeDAO(String tno);
 
     public List<TodoDTO> searchDAO(PageRequestDTO pageRequestDTO);
-//    public List<TodoDTO> selectList(PageRequestDTO pageRequestDTO);
+    public List<TodoDTO> selectList(PageRequestDTO pageRequestDTO);
+    public int searchCountDAO(PageRequestDTO pageRequestDTO);
     public int getCount(PageRequestDTO pageRequestDTO);
 
 }

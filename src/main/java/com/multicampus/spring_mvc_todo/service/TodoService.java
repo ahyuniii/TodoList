@@ -15,11 +15,11 @@ public class TodoService implements ITodoService {
     @Autowired
     private ITodoDAO dao;
 
-//    @Override
-//    public List<TodoDTO> selectAll() {
-//
-//        return dao.selectAllDAO();
-//    }
+    @Override
+    public List<TodoDTO> selectAll() {
+
+        return dao.selectAllDAO();
+    }
     @Override
     public TodoDTO view(String tno) {
 
@@ -44,12 +44,16 @@ public class TodoService implements ITodoService {
     }
 
     @Override
-    public List<TodoDTO> search(PageRequestDTO pageRequestDTO) {
-        return dao.searchDAO(pageRequestDTO);
-//        List<TodoDTO> dtoList = dao.searchDAO(pageRequestDTO);
-//        int total = dtoList.size();
-//        PageResponseDTO<TodoDTO> pageResponseDTO =PageResponseDTO.<TodoDTO> withAll()
-//                .dtoList(dtoList)
+//    public List<TodoDTO> search(PageRequestDTO pageRequestDTO) {
+    public PageResponseDTO<TodoDTO> search(PageRequestDTO pageRequestDTO) {
+        return new PageResponseDTO<TodoDTO>(pageRequestDTO, dao.searchDAO(pageRequestDTO), dao.getCount(pageRequestDTO));
+//        return dao.searchDAO(pageRequestDTO);
+
+//        List<TodoDTO> dtoList = dao.getCount(pageRequestDTO);
+//        int total = dao.getCount(pageRequestDTO);
+////        int total = dtoList.size();
+//        PageResponseDTO<TodoDTO> pageResponseDTO = PageResponseDTO.<TodoDTO> withAll()
+////                .dtoList(dtoList)
 //                .total(total)
 //                .pageRequestDTO(pageRequestDTO)
 //                .build();
@@ -58,7 +62,7 @@ public class TodoService implements ITodoService {
 
     @Override
     public PageResponseDTO<TodoDTO> getList(PageRequestDTO pageRequestDTO) {
-        List<TodoDTO> dtoList = dao.searchDAO(pageRequestDTO);
+        List<TodoDTO> dtoList = dao.selectList(pageRequestDTO);
         int total = dao.getCount(pageRequestDTO);
 
         PageResponseDTO<TodoDTO> pageResponseDTO = PageResponseDTO.<TodoDTO> withAll()

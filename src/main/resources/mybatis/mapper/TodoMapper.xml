@@ -4,9 +4,9 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.multicampus.spring_mvc_todo.dao.ITodoDAO">
-<!--    <select id="selectAllDAO" resultType="com.multicampus.spring_mvc_todo.dto.TodoDTO">-->
-<!--        select * from tbl_todo-->
-<!--    </select>-->
+    <select id="selectAllDAO" resultType="com.multicampus.spring_mvc_todo.dto.TodoDTO">
+        select * from tbl_todo
+    </select>
 
     <select id="viewDAO" resultType="com.multicampus.spring_mvc_todo.dto.TodoDTO">
         SELECT * FROM tbl_todo WHERE tno = #{tno}
@@ -43,8 +43,10 @@
                         finished = 1
                     </trim>
                 </if>
-                <if test="startDate != null and endDate != null">
-                    <trim prefix="and">
+                  <if test="startDate != null and endDate != null">
+<!--                <if test="!startDate.equals('') or !endDate.equals('') ">-->
+
+                <trim prefix="and">
                         dueDate between #{startDate} and #{endDate}
                     </trim>
                 </if>
@@ -52,9 +54,10 @@
         order by tno desc limit #{skip}, #{size}
     </select>
 
-<!--    <select id="selectList" resultType="com.multicampus.spring_mvc_todo.dto.TodoDTO">-->
-<!--        select * from tbl_todo order by tno limit #{skip}, #{size}-->
-<!--    </select>-->
+
+    <select id="selectList" resultType="com.multicampus.spring_mvc_todo.dto.TodoDTO">
+        select * from tbl_todo order by tno limit #{skip}, #{size}
+    </select>
 
     <select id="getCount" resultType="int">
         select count(tno) from tbl_todo
@@ -74,11 +77,71 @@
                 finished = 1
             </trim>
         </if>
-        <if test="startDate != null and endDate != null">
+         <if test="startDate != null and endDate != null">
+<!--            <if test="!startDate.equals('') or !endDate.equals('') ">-->
             <trim prefix="and">
                 dueDate between #{startDate} and #{endDate}
             </trim>
         </if>
         </where>
+
     </select>
+
+
+
+
+<!--    <select id="searchDAO" resultType="com.multicampus.spring_mvc_todo.dao.TodoDAO"-->
+<!--            parameterType="com.multicampus.spring_mvc_todo.dto.PageRequestDTO">-->
+<!--        select * from tbl_todo-->
+<!--        <where>-->
+<!--            <if test="types != null and types.length > 0">-->
+<!--                <foreach collection="types" item="type" open="(" close=") " separator=" OR ">-->
+<!--                    <if test="type == 't'.toString()">-->
+<!--                        title like concat('%', #{searchContent}, '%')-->
+<!--                    </if>-->
+<!--                    <if test="type == 'w'.toString()">-->
+<!--                        writer like concat('%', #{searchContent}, '%')-->
+<!--                    </if>-->
+<!--                </foreach>-->
+<!--            </if>-->
+<!--            <if test="finished">-->
+<!--                <trim prefix="and">-->
+<!--                    finished = 1-->
+<!--                </trim>-->
+<!--            </if>-->
+<!--            <if test="startDate != null and endDate != null">-->
+<!--                <trim prefix="and">-->
+<!--                    dueDate between #{startDate} and #{endDate}-->
+<!--                </trim>-->
+<!--            </if>-->
+<!--        </where>-->
+<!--        order by tno desc limit #{skip}, #{size}-->
+<!--    </select>-->
+
+<!--    <select id="getCount" resultType="int">-->
+<!--        select count(tno) from tbl_todo-->
+<!--        <where>-->
+<!--            <if test="types != null and types.length > 0">-->
+<!--                <foreach collection="types" item="type" open="(" close=") " separator=" OR ">-->
+<!--                    <if test="type == 't'.toString()">-->
+<!--                        title like concat('%', #{searchContent}, '%')-->
+<!--                    </if>-->
+<!--                    <if test="type == 'w'.toString()">-->
+<!--                        writer like concat('%', #{searchContent}, '%')-->
+<!--                    </if>-->
+<!--                </foreach>-->
+<!--            </if>-->
+<!--            <if test="finished">-->
+<!--                <trim prefix="and">-->
+<!--                    finished = 1-->
+<!--                </trim>-->
+<!--            </if>-->
+<!--            <if test="startDate != null and endDate != null">-->
+<!--                <trim prefix="and">-->
+<!--                    dueDate between #{startDate} and #{endDate}-->
+<!--                </trim>-->
+<!--            </if>-->
+<!--        </where>-->
+<!--    </select>-->
+
 </mapper>

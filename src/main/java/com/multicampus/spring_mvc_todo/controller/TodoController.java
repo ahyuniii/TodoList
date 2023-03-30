@@ -35,6 +35,7 @@ public class TodoController {
 //            pageRequestDTO = pageRequestDTO.builder().build();
 //        }
         model.addAttribute("responseDTO", todoService.getList(pageRequestDTO));
+        model.addAttribute("responseDTO", todoService.search(pageRequestDTO));
     }
 
 
@@ -83,9 +84,9 @@ public class TodoController {
         return "redirect:list";
     }
 
-    @GetMapping("/search")
-    public String search(PageRequestDTO pageRequestDTO, Model model) {
-        model.addAttribute("pageRequestDTO", todoService.search(pageRequestDTO));
-        return "list";
-    }
+//    @GetMapping("/search")
+//    public String search(PageRequestDTO pageRequestDTO, Model model) {
+//        model.addAttribute("pageRequestDTO", todoService.search(pageRequestDTO));
+//        return "list";
+//    }
 }
